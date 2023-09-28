@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 
 @app.route("/secret/<hash>", methods=["GET"])
-def get_secret_be_hash(hash: str):
+def get_secret_by_hash(hash: str):
     return f"You tried to reach the {hash} endpoint"
 
 
