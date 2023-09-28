@@ -3,6 +3,8 @@
 # server
 .venv
 .env
+__pycache__
+.mypy_cache
 
 # client
 node_modules
