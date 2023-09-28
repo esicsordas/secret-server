@@ -1,5 +1,6 @@
 import os
 import psycopg2
+from psycopg2.extras import DictCursor
 import dotenv
 
 dotenv.load_dotenv()
@@ -16,18 +17,18 @@ def db_connection(func):
         }
         try:
             connection = psycopg2.connect(**db_params)
-            cursor = connection.cursor()
+            cursor = connection.cursor(cursor_factory=DictCursor)
 
             result = func(cursor, *args, **kwargs)
             connection.commit()
-
+            
+            return result
         except (Exception, psycopg2.Error) as error:
-            print("Error while connecting to PostgreSQL", error)
+            print("Error while connecting to PostgreSQL", error, error.__class__)
         finally:
             if cursor:
                 cursor.close()
             if connection:
                 connection.close()
-        return result
 
     return wrapper
