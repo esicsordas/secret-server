@@ -1,0 +1,8 @@
+.vscode
+
+# server
+.venv
+.env
+
+# client
+node_modules
