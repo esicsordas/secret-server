@@ -13,17 +13,18 @@ def check_if_works():
 def get_secret_by_hash(hash: str):
     result = get_one_secret_by_hash(hash)
     if result is None:
-        abort(404, "This secret doesn't exist!")
+        return jsonify({"message": "Secret not found!"}), 404
     return result
 
 
 @app.route("/secret", methods=["POST"])
 def add_new_secret_to_database():
-    json_request = request.get_json()
-    result = add_new_secret(json_request)
-    if isinstance(result, str) and result.startswith("An unexpected error occured"):
-        abort(400, "Secret not created")
-    return result
+    try:
+        json_request = request.get_json()
+        result = add_new_secret(json_request)
+        return result
+    except:
+        return jsonify({"message": "an error occured"}), 400
 
 
 create_table()

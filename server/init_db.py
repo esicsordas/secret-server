@@ -5,8 +5,7 @@ from db_connection import db_connection
 def create_table(cursor):
     create_table_query = """
             CREATE TABLE IF NOT EXISTS secrets (
-                id SERIAL PRIMARY KEY,
-                hash VARCHAR(16),
+                hash VARCHAR(16) PRIMARY KEY,
                 secret_text VARCHAR(255),
                 created_at TIMESTAMP,
                 expires_at TIMESTAMP,
