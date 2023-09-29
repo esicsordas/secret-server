@@ -1,6 +1,7 @@
-from flask import Flask, request, abort, jsonify
+from flask import Flask, request, jsonify
 from init_db import create_table
-from db_requests import get_one_secret_by_hash, add_new_secret
+from db_requests import get_one_secret_by_hash, add_new_secret, delete_secret
+from logic import is_out_of_views, is_expired
 
 app = Flask(__name__)
 
@@ -12,9 +13,13 @@ def check_if_works():
 @app.route("/secret/<hash>", methods=["GET"])
 def get_secret_by_hash(hash: str):
     result = get_one_secret_by_hash(hash)
+    is_remaining_views_zero =is_out_of_views(result)
+    is_secret_expired = is_expired(result)
+    if is_remaining_views_zero or is_secret_expired : 
+        delete_secret(result.hash)
     if result is None:
         return jsonify({"message": "Secret not found!"}), 404
-    return result
+    return result.to_dict()
 
 
 @app.route("/secret", methods=["POST"])
