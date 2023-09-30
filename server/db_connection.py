@@ -2,6 +2,7 @@ import os
 import psycopg2
 from psycopg2.extras import DictCursor
 import dotenv
+from exception import SecretServiceError
 
 dotenv.load_dotenv()
 
@@ -16,19 +17,19 @@ def db_connection(func):
             "password": os.getenv("DATABASE_PASSWORD"),
         }
         try:
+            connection = None
             connection = psycopg2.connect(**db_params)
             cursor = connection.cursor(cursor_factory=DictCursor)
 
             result = func(cursor, *args, **kwargs)
             connection.commit()
-            
+
             return result
-        except (Exception, psycopg2.Error) as error:
-            print("Error while connecting to PostgreSQL", error, error.__class__)
+        except psycopg2.OperationalError:
+            raise SecretServiceError("Database connection failed", status_code=500)
         finally:
-            if cursor:
-                cursor.close()
             if connection:
+                cursor.close()
                 connection.close()
 
     return wrapper

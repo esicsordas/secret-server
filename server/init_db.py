@@ -2,7 +2,7 @@ from db_connection import db_connection
 
 
 @db_connection
-def create_table(cursor):
+def create_table(cursor) -> None:
     create_table_query = """
             CREATE TABLE IF NOT EXISTS secrets (
                 hash VARCHAR(16) PRIMARY KEY,
