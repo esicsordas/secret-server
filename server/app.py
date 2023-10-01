@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from init_db import create_table
 from db_requests import get_one_secret_by_hash, add_new_secret, delete_secret
 from logic import (
@@ -11,6 +12,7 @@ from logic import (
 from exception import SecretServiceError
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/ping")
