@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.js"
-import AddNewSecretPage from "./AddNewSecretPage.jsx"
+import AddNewSecretPage from "./Pages/AddNewSecretPage.jsx"
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import GetASecretPage from "./GetASecretPage.jsx";
+import GetASecretPage from "./Pages/GetASecretPage.jsx";
 
 const router = createBrowserRouter([
   {

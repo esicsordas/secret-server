@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Container, Typography } from "@mui/material";
-import Footer from "./Components/Footer";
-import Header from "./Components/Header";
-import HashForm from "./Components/HashForm";
+import Footer from "../Components/Footer";
+import Header from "../Components/Header";
+import HashForm from "../Components/HashForm";
 
 const GetASecretPage = () => {
     const [currentComponent, setCurrentComponent] = useState(null);
