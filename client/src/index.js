@@ -5,6 +5,7 @@ import App from "./App.js"
 import AddNewSecretPage from "./AddNewSecretPage.jsx"
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import GetASecretPage from "./GetASecretPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/add-new-secret",
     element: <AddNewSecretPage />
+  },
+  {
+    path: "/get-a-secret",
+    element: <GetASecretPage/>
   }
 
 ])
