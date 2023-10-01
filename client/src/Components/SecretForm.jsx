@@ -23,15 +23,7 @@ const SecretForm = ({ handleChange }) => {
     "expire_after_views": null,
   });
 
-  const handleInputChangeText = (e) => {
-    const { name, value } = e.target;
-    setFormData((previousData) => ({
-      ...previousData,
-      [name]: value,
-    }));
-  };
-
-  const handleInputChangeNumber = (e) => {  
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((previousData) => ({
       ...previousData,
@@ -74,7 +66,7 @@ const SecretForm = ({ handleChange }) => {
           type="text"
           required={true}
           value={formData.secret_text || ""}
-          onChange={handleInputChangeText}
+          onChange={handleInputChange}
           placeholder="Write your secret here!"
         ></Input>
         </FormControl>
@@ -88,7 +80,7 @@ const SecretForm = ({ handleChange }) => {
           type="number"
           required={true}
           value={formData.expire_after_views || ""}
-          onChange={handleInputChangeNumber}
+          onChange={handleInputChange}
           placeholder="Write in a positive integer!"
           inputProps={{ min: 1}}
         ></Input>
@@ -103,7 +95,7 @@ const SecretForm = ({ handleChange }) => {
           type="number"
           required={true}
           value={formData.expire_after || ""}
-          onChange={handleInputChangeNumber}
+          onChange={handleInputChange}
           placeholder="Write in a positive integer!"
           inputProps={{ min:0}}
         ></Input>
