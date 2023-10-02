@@ -1,6 +1,8 @@
 import { Paper, InputLabel, Input, Button, FormControl } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SecretProvider from "./SecretProvider";
+import { useError } from "../Context/ErrorContext";
 
 const getSecret = (id) => {
   return fetch(`http://localhost:3000/v1/secret/${id}`, {
@@ -13,6 +15,8 @@ const getSecret = (id) => {
 
 const HashForm = ({ handleChange }) => {
   const [hashCode, setHashCode] = useState(null);
+  const navigate = useNavigate();
+  const { catchError } = useError();
 
   const handleInputChange = (e) => {
     setHashCode(e.target.value);
@@ -22,8 +26,8 @@ const HashForm = ({ handleChange }) => {
     getSecret(id)
       .then(async (res) => {
         if (!res.ok) {
-           const error = await res.json();
-           throw new Error(error.message)
+          const error = await res.json();
+          throw new Error(error.message);
         }
         return res.json();
       })
@@ -31,9 +35,10 @@ const HashForm = ({ handleChange }) => {
         handleChange(<SecretProvider secret={data} />);
       })
       .catch((error) => {
-        console.log(error)
-        throw error;
-      });
+        catchError(error.message)
+        navigate("/error");
+      })
+      ;
   };
 
   return (

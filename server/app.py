@@ -45,7 +45,7 @@ def add_new_secret_to_database():
 
 @app.errorhandler(SecretServiceError)
 def handle_error(error: SecretServiceError):
-    response = jsonify({"An error occured: ": error.message})
+    response = jsonify({"message": f"An error occured: {error.message}"})
     response.status_code = error.status_code
     return response
 

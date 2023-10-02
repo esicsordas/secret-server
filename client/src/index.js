@@ -7,6 +7,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import GetASecretPage from "./Pages/GetASecretPage.jsx";
 import ErrorPage from "./Pages/ErrorPage.jsx";
+import { ErrorContextProvider } from "./Context/ErrorContext.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/get-a-secret",
         element: <GetASecretPage/>,
+      },
+      {
+        path: "/error",
+        element: <ErrorPage />
       }
     ]
   },
@@ -32,7 +37,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ErrorContextProvider>
     <RouterProvider router={router} />
+    </ErrorContextProvider>
   </React.StrictMode>
 );
 
