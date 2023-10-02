@@ -6,22 +6,27 @@ import AddNewSecretPage from "./Pages/AddNewSecretPage.jsx"
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import GetASecretPage from "./Pages/GetASecretPage.jsx";
+import ErrorPage from "./Pages/ErrorPage.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-    errorElement: <></>,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <App />,
+      },
+      {
+        path: "/add-new-secret",
+        element: <AddNewSecretPage />,
+      },
+      {
+        path: "/get-a-secret",
+        element: <GetASecretPage/>,
+      }
+    ]
   },
-  {
-    path: "/add-new-secret",
-    element: <AddNewSecretPage />
-  },
-  {
-    path: "/get-a-secret",
-    element: <GetASecretPage/>
-  }
-
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

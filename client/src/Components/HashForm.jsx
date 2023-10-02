@@ -20,18 +20,19 @@ const HashForm = ({ handleChange }) => {
 
   const handleSubmit = (id) => {
     getSecret(id)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error("Network response wasn't ok");
+      .then(async (res) => {
+        if (!res.ok) {
+           const error = await res.json();
+           throw new Error(error.message)
         }
+        return res.json();
       })
       .then((data) => {
         handleChange(<SecretProvider secret={data} />);
       })
       .catch((error) => {
-        console.error("Fetch error: ", error);
+        console.log(error)
+        throw error;
       });
   };
 
@@ -51,7 +52,9 @@ const HashForm = ({ handleChange }) => {
             placeholder="Your identifier"
           ></Input>
         </FormControl>
-        <Button type="submit" variant="contained">SUBMIT</Button>
+        <Button type="submit" variant="contained">
+          SUBMIT
+        </Button>
       </form>
     </Paper>
   );
