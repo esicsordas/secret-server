@@ -1,4 +1,4 @@
-import { Button, Container, Typography } from '@mui/material';
+import { Button, Container, Typography, Box } from '@mui/material';
 import Footer from './Components/Footer';
 import Header from './Components/Header';
 import { useNavigate } from 'react-router-dom';
@@ -15,20 +15,22 @@ const App = () => {
     }
 
     return (
-        <Container>
-            <Header></Header>
+        <>
+            <Header />
+            <Container sx={{ mt: 12 }}>
+                <Typography variant="h3" sx={{ my: 6, textAlign: "center" }}>The Secret Server</Typography>
 
-            <Typography variant="h2">The Secret Server</Typography>
+                <Typography variant="h5" sx={{ my: 8, textAlign: "center" }}>Save your secret, and send to whoever you want to
+                    - with the page we provide, only those people can acces the secret, who you want.</Typography>
+                <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, justifyContent: "space-around", gap: 4 }}>
+                    <Button variant="contained" sx={{ p: 1, m: 2 }} size="large" onClick={goToNewSecret}>Add new secret</Button>
 
-            <Typography>Save your secret, and send to whoever you want to
-             - with the page we provide, only those people can acces the secret, who you want.</Typography>
+                    <Button variant="contained" sx={{ p: 1, m: 2 }} size="large" onClick={goToGetSecret}>Retrieve secret</Button>
+                </Box>
+            </Container>
+            <Footer />
+        </>
 
-             <Button variant="contained" onClick={goToNewSecret}>Add new secret</Button>
-
-             <Button variant="contained" onClick={goToGetSecret}>Retrieve secret</Button>
-
-            <Footer></Footer>
-        </Container>
 
     )
 }

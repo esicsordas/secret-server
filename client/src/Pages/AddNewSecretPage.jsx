@@ -12,9 +12,9 @@ const AddNewSecretPage = () => {
   }, []);
 
   return (
-    <Container>
+    <Container sx={{ mt: 12 }}>
       <Header />
-      <Typography>Save your secret</Typography>
+      <Typography variant="h4">Save your secret</Typography>
       {currentComponent}
       <Footer />
     </Container>

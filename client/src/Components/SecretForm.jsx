@@ -55,29 +55,31 @@ const SecretForm = ({ handleChange }) => {
   };
 
   return (
-    <Paper sx={{ p: 2, m: 2 }} elevation={4}>
+    <Paper sx={{ px: 4, py: 5, m: 2 }} elevation={4}>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit(formData);
         }}
       >
-        <FormControl sx={{ display: "flex", gap: 2 }}>
-          <InputLabel htmlFor="secret_text">This is my secret:</InputLabel>
+        <FormControl sx={{ display: "flex"}}>
+          <InputLabel htmlFor="secret_text" >The secret:</InputLabel>
           <Input
             id="secret_text"
             name="secret_text"
             type="text"
             required={true}
+            multiline={true}
             value={formData.secret_text || ""}
             onChange={handleInputChange}
             inputProps={{ maxLength: 255 }}
-            placeholder="Write your secret here!"
+            placeholder="Max. 255 character"
+            sx={{my:6, mx: 2}}
           ></Input>
         </FormControl>
-        <FormControl sx={{ display: "flex", gap: 2 }}>
+        <FormControl sx={{ display: "flex"}}>
           <InputLabel htmlFor="expire_after_views">
-            Number of times my secret can be viewed:
+            How many timescan it be viewed:
           </InputLabel>
           <Input
             id="expire_after_views"
@@ -93,11 +95,12 @@ const SecretForm = ({ handleChange }) => {
             onChange={handleInputChange}
             placeholder="Write in a positive integer!"
             inputProps={{ min: 1, max: 9999999 }}
+            sx={{my:6, mx:2}}
           ></Input>
         </FormControl>
-        <FormControl sx={{ display: "flex", gap: 2 }}>
+        <FormControl sx={{ display: "flex"}}>
           <InputLabel htmlFor="expire_after">
-            For how many minutes is my secret available:
+            For how long is it available:
           </InputLabel>
           <Input
             id="expire_after"
@@ -113,6 +116,7 @@ const SecretForm = ({ handleChange }) => {
             onChange={handleInputChange}
             placeholder="Write in a positive integer!"
             inputProps={{ min: 0, max: 9999999 }}
+            sx={{my:6, mx:2 }}
           ></Input>
         </FormControl>
         <Button type="submit" variant="contained">

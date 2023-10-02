@@ -1,4 +1,4 @@
-import { Container, Typography } from"@mui/material";
+import { Container, Typography, Paper } from"@mui/material";
 import { useRouteError } from "react-router-dom";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
@@ -11,10 +11,12 @@ const ErrorPage = ( ) => {
 
 
     return (
-    <Container id="error-page">
+    <Container sx={{ mt: 12, display:"flex", flexDirection:"column", alignItems:"center" }}>
         <Header />
-        <Typography>Sorry, an unexpected error occured:</Typography>
-        <Typography>{  error || routeError.statusText || routeError.message }</Typography>
+        <Paper sx={{ px: 4, py: 5, m: 2 , display:"flex", flexDirection:"column", alignItems:"center"}} elevation={4}>
+        <Typography variant="h4" sx={{p: 5, color: "primary.error"}}>Sorry, an error occured:</Typography>
+        <Typography variant="h5" sx={{p: 5}}>{  error || routeError?.statusText || routeError?.message }</Typography>
+        </Paper>
         <Footer />
     </Container>
 )

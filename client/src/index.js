@@ -8,6 +8,7 @@ import reportWebVitals from "./reportWebVitals";
 import GetASecretPage from "./Pages/GetASecretPage.jsx";
 import ErrorPage from "./Pages/ErrorPage.jsx";
 import { ErrorContextProvider } from "./Context/ErrorContext.jsx";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 const router = createBrowserRouter([
   {
@@ -34,12 +35,38 @@ const router = createBrowserRouter([
   },
 ])
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#1D7CF0",
+      light: "#E6F4F1",
+      dark: "#0046AF",
+      contrastText: "#FFFFFF",
+      error: "#E9400F"
+    },
+  },
+  typography : {
+    fontFamily : "PT Serif",
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+    },
+  }
+})
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ThemeProvider theme={theme}>
     <ErrorContextProvider>
     <RouterProvider router={router} />
     </ErrorContextProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
