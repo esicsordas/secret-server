@@ -1,5 +1,7 @@
+import { apiUrl } from "./config";
+
 const getSecret = (id) => {
-    return fetch(`http://localhost:3000/v1/secret/${id}`, {
+    return fetch(apiUrl + `/v1/secret/${id}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -12,7 +14,7 @@ const createSecret = (secret) => {
     secret.expire_after = parseInt(secret.expire_after);
     secret.expire_after_views = parseInt(secret.expire_after_views);
   
-    return fetch(`http://localhost:3000/v1/secret`, {
+    return fetch(apiUrl + `/v1/secret`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -81,7 +81,7 @@ formatting_options = {
 
 create_table()
 app.run(
-    host="localhost",
-    port=3000,
+    host="10.44.10.167",
+    port=8000,
     debug=True,
 )
