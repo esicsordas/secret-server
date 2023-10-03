@@ -2,3 +2,4 @@ Flask==2.3.3
 psycopg2==2.9.8
 python-dotenv==1.0.0
 flask-cors==4.0.0
+dicttoxml==1.7.16
