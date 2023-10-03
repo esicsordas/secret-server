@@ -79,7 +79,7 @@ const SecretForm = ({ handleChange }) => {
         </FormControl>
         <FormControl sx={{ display: "flex"}}>
           <InputLabel htmlFor="expire_after_views">
-            How many timescan it be viewed:
+            How many times can it be viewed:
           </InputLabel>
           <Input
             id="expire_after_views"
