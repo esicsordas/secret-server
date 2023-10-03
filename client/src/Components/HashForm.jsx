@@ -3,15 +3,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SecretProvider from "./SecretProvider";
 import { useError } from "../Context/ErrorContext";
+import { getSecret } from "../fetch.js"
 
-const getSecret = (id) => {
-  return fetch(`http://localhost:3000/v1/secret/${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-};
+
 
 const HashForm = ({ handleChange }) => {
   const [hashCode, setHashCode] = useState(null);

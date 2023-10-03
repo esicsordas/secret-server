@@ -3,19 +3,8 @@ import HashCodeProvider from "./HashCodeProvider";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useError } from "../Context/ErrorContext";
+import { createSecret } from "../fetch";
 
-const createSecret = (secret) => {
-  secret.expire_after = parseInt(secret.expire_after);
-  secret.expire_after_views = parseInt(secret.expire_after_views);
-
-  return fetch(`http://localhost:3000/v1/secret`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(secret),
-  });
-};
 
 const SecretForm = ({ handleChange }) => {
   const [formData, setFormData] = useState({
