@@ -10,6 +10,9 @@ from logic import (
     validate_input_data,
 )
 from exception import SecretServiceError
+from model import Secret
+from dicttoxml import dicttoxml
+
 
 app = Flask(__name__)
 CORS(app)
@@ -22,6 +25,7 @@ def check_if_works():
 
 @app.route("/v1/secret/<hash>", methods=["GET"])
 def get_secret_by_hash(hash: str):
+    accept_header = request.headers.get("Accept")
     result = get_one_secret_by_hash(hash)
     if result is None:
         raise SecretServiceError("Secret not found", status_code=404)
@@ -31,16 +35,25 @@ def get_secret_by_hash(hash: str):
         delete_secret(result.hash)
         raise SecretServiceError("Secret not available anymore", status_code=404)
     update_views(result)
-    return result.to_dict()
+    if accept_header in formatting_options:
+        formatted_result = formatting_options[accept_header](result)
+    else:
+        raise SecretServiceError("Unsupported content type", status_code=415)
+    return formatted_result
 
 
 @app.route("/v1/secret", methods=["POST"])
 def add_new_secret_to_database():
+    accept_header = request.headers.get("Accept")
     json_request = request.get_json()
     validate_input_keys(json_request)
     validate_input_data(json_request)
     result = add_new_secret(json_request)
-    return result.to_dict()
+    if accept_header in formatting_options:
+        formatted_result = formatting_options[accept_header](result)
+    else:
+        raise SecretServiceError("Unsupported content type", status_code=415)
+    return formatted_result
 
 
 @app.errorhandler(SecretServiceError)
@@ -48,6 +61,22 @@ def handle_error(error: SecretServiceError):
     response = jsonify({"message" : error.message})
     response.status_code = error.status_code
     return response
+
+
+def format_to_json(data:Secret) ->dict:
+    return data.to_dict()
+
+
+def format_to_xml(data:Secret) ->str:
+    secret_dict = data.to_dict()
+    return dicttoxml(secret_dict)
+
+
+formatting_options = {
+    "application/json": format_to_json,
+    "application/xml": format_to_xml,
+    "*/*": format_to_json
+}
 
 
 create_table()
