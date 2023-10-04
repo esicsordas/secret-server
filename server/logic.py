@@ -1,7 +1,7 @@
-from model import Secret
-from db_requests import update_secret_remaining_views
+from server.model import Secret
+from server.db_requests import update_secret_remaining_views
 from datetime import datetime
-from exception import SecretServiceError
+from server.exception import SecretServiceError
 
 
 def is_out_of_views(secret: Secret) -> bool:
@@ -14,7 +14,7 @@ def is_expired(secret: Secret) -> bool:
 
 def update_views(secret: Secret) -> None:
     secret.remaining_views -= 1
-    update_secret_remaining_views(secret.hash, secret.remaining_views)
+    update_secret_remaining_views( secret.hash, secret.remaining_views)
 
 
 def validate_input_keys(input: dict) -> None:
