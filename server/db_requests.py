@@ -1,7 +1,7 @@
 import uuid
-from model import Secret
+from server.model import Secret
 from datetime import datetime, timedelta
-from db_connection import db_connection
+from server.db_connection import db_connection
 
 
 @db_connection

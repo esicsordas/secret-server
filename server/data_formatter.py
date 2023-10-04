@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from model import Secret
+from server.model import Secret
 from dicttoxml import dicttoxml
 
 
