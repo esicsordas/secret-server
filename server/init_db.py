@@ -1,4 +1,4 @@
-from server.db_connection import db_connection
+from db_connection import db_connection
 
 
 @db_connection

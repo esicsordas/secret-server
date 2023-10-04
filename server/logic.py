@@ -1,7 +1,7 @@
-from server.model import Secret
-from server.db_requests import update_secret_remaining_views
+from model import Secret
+from db_requests import update_secret_remaining_views
 from datetime import datetime
-from server.exception import SecretServiceError
+from exception import SecretServiceError
 
 
 def is_out_of_views(secret: Secret) -> bool:

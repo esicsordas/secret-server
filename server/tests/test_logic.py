@@ -1,11 +1,11 @@
 import pytest
-from server.model import Secret
+from model import Secret
 from datetime import datetime, timedelta
 from unittest.mock import Mock, patch
 from pytest import MonkeyPatch
-from server.logic import is_out_of_views, is_expired, update_views, validate_input_keys, validate_input_data
-from server import logic 
-from server.exception import SecretServiceError
+from logic import is_out_of_views, is_expired, update_views, validate_input_keys, validate_input_data
+import logic 
+from exception import SecretServiceError
 from contextlib import nullcontext as does_not_raise
 
 

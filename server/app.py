@@ -9,8 +9,8 @@ from logic import (
     validate_input_keys,
     validate_input_data,
 )
-from server.exception import SecretServiceError
-from server.model import Secret
+from exception import SecretServiceError
+from model import Secret
 from data_formatter import JsonFormatter, XmlFormatter, FORMATTING_OPTIONS
 
 
