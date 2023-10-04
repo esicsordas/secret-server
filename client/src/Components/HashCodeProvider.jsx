@@ -21,9 +21,7 @@ const HashCodeProvider = ({ id }) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-        }}
-        elevation={4}
-      >
+        }} elevation={4} >
         <Typography variant="h5" sx={{p: 3}}>Your secret's identifier</Typography>
         <Typography variant="h6" sx={{p: 3, color:"primary.dark", fontStyle: "italic"}}>{id}</Typography>
         <Button variant="contained" sx={{ p: 1, m: 2 }} size="large" onClick={handleClick}>
@@ -33,5 +31,6 @@ const HashCodeProvider = ({ id }) => {
     </Container>
   );
 };
+
 
 export default HashCodeProvider;

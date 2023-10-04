@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 
 const Footer = () => {
+
   return (
       <Box
         sx={{
@@ -15,13 +16,13 @@ const Footer = () => {
           display: "flex",
           justifyContent: "flex-end",
           maxWidth: "100%"
-        }}
-      >
+        }}>
           <Typography sx={{textAlign:"right"}}>
             Made by Esi Csordas, {new Date().getFullYear()}
           </Typography>
       </Box>
   );
 };
+
 
 export default Footer;

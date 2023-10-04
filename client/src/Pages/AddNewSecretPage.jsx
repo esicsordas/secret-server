@@ -18,4 +18,5 @@ const AddNewSecretPage = () => {
   );
 };
 
+
 export default AddNewSecretPage;

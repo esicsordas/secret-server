@@ -1,7 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import { Button, Container, Typography, Box } from '@mui/material';
 import Footer from './Components/Footer';
 import Header from './Components/Header';
-import { useNavigate } from 'react-router-dom';
 
 const App = () => {
     const navigate = useNavigate();
@@ -30,8 +30,6 @@ const App = () => {
             </Container>
             <Footer />
         </>
-
-
     )
 }
 

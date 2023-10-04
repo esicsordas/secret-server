@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import reportWebVitals from "./reportWebVitals";
 import App from "./App.js"
 import AddNewSecretPage from "./Pages/AddNewSecretPage.jsx"
-import reportWebVitals from "./reportWebVitals";
 import GetASecretPage from "./Pages/GetASecretPage.jsx";
 import ErrorPage from "./Pages/ErrorPage.jsx";
 import { ErrorContextProvider } from "./Context/ErrorContext.jsx";
