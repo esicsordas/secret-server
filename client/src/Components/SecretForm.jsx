@@ -1,12 +1,11 @@
 import { FormControl, Button, Paper, InputLabel, Input } from "@mui/material";
-import HashCodeProvider from "./HashCodeProvider";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useError } from "../Context/ErrorContext";
 import { createSecret } from "../fetch";
 
 
-const SecretForm = ({ handleChange }) => {
+const SecretForm = ({ onChange }) => {
   const [formData, setFormData] = useState({
     secret_text: null,
     expire_after: null,
@@ -35,7 +34,7 @@ const SecretForm = ({ handleChange }) => {
       })
       .then((data) => {
         const id = data.hash;
-        handleChange(<HashCodeProvider id={id} />);
+        onChange(id);
       })
       .catch((error) => {
         catchError(error.message);
