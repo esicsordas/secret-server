@@ -1,4 +1,4 @@
-const apiUrl = "http://10.44.10.167:3000";
+const apiUrl = "http://localhost:8000";
 
 module.exports = {
     apiUrl,
