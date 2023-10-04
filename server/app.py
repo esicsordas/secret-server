@@ -61,7 +61,6 @@ def handle_error(error: SecretServiceError):
     return response
 
 
-create_table()
 app.run(
     host="localhost",
     port=8000,
