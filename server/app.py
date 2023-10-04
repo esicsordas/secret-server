@@ -1,6 +1,6 @@
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from init_db import create_table
 from db_requests import get_one_secret_by_hash, add_new_secret, delete_secret
 from logic import (
     is_out_of_views,
@@ -62,7 +62,6 @@ def handle_error(error: SecretServiceError):
 
 
 app.run(
-    host="localhost",
-    port=8000,
-    debug=True,
+    host="0.0.0.0",
+    port=os.getenv("PORT", 8000),
 )
