@@ -1,5 +1,5 @@
-import { Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Button, Box } from "@mui/material";
 
 const Header = () => {
     const navigate = useNavigate();
@@ -26,5 +26,6 @@ const Header = () => {
         </Box>
     )
 }
+
 
 export default Header;

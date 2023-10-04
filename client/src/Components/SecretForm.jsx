@@ -1,23 +1,11 @@
-import { FormControl, Button, Paper, InputLabel, Input } from "@mui/material";
-import HashCodeProvider from "./HashCodeProvider";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useError } from "../Context/ErrorContext";
+import { createSecret } from "../fetch";
+import { FormControl, Button, Paper, InputLabel, Input } from "@mui/material";
 
-const createSecret = (secret) => {
-  secret.expire_after = parseInt(secret.expire_after);
-  secret.expire_after_views = parseInt(secret.expire_after_views);
 
-  return fetch(`http://localhost:3000/v1/secret`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(secret),
-  });
-};
-
-const SecretForm = ({ handleChange }) => {
+const SecretForm = ({ onChange }) => {
   const [formData, setFormData] = useState({
     secret_text: null,
     expire_after: null,
@@ -34,34 +22,25 @@ const SecretForm = ({ handleChange }) => {
     }));
   };
 
-  const handleSubmit = (secret) => {
-    createSecret(secret)
-      .then(async (res) => {
-        if (!res.ok) {
-          const error = await res.json();
-          throw new Error(error.message);
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        const id = data.hash;
-        handleChange(<HashCodeProvider id={id} />);
-      })
-      .catch((error) => {
-        catchError(error.message);
-        navigate("/error");
-      });
+  async function handleSubmit(secret) {
+    try {
+      const response = await createSecret(secret);
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+      onChange(data.hash);
+    } catch (error) {
+      catchError(error.message);
+      navigate("/error");
   };
+}
 
   return (
     <Paper sx={{ px: 4, py: 5, m: 2 }} elevation={4}>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit(formData);
-        }}
-      >
+      <form onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(formData);}}>
         <FormControl sx={{ display: "flex"}}>
           <InputLabel htmlFor="secret_text" >The secret:</InputLabel>
           <Input
@@ -75,7 +54,7 @@ const SecretForm = ({ handleChange }) => {
             inputProps={{ maxLength: 255 }}
             placeholder="Max. 255 character"
             sx={{my:6, mx: 2}}
-          ></Input>
+          />
         </FormControl>
         <FormControl sx={{ display: "flex"}}>
           <InputLabel htmlFor="expire_after_views">
@@ -96,7 +75,7 @@ const SecretForm = ({ handleChange }) => {
             placeholder="Write in a positive integer!"
             inputProps={{ min: 1, max: 9999999 }}
             sx={{my:6, mx:2}}
-          ></Input>
+          />
         </FormControl>
         <FormControl sx={{ display: "flex"}}>
           <InputLabel htmlFor="expire_after">
@@ -117,7 +96,7 @@ const SecretForm = ({ handleChange }) => {
             placeholder="Write in a positive integer!"
             inputProps={{ min: 0, max: 9999999 }}
             sx={{my:6, mx:2 }}
-          ></Input>
+          />
         </FormControl>
         <Button type="submit" variant="contained">
           SUBMIT
@@ -126,5 +105,6 @@ const SecretForm = ({ handleChange }) => {
     </Paper>
   );
 };
+
 
 export default SecretForm;

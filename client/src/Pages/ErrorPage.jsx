@@ -1,8 +1,8 @@
-import { Container, Typography, Paper, Button } from"@mui/material";
 import { useRouteError, useNavigate } from "react-router-dom";
+import { useError } from "../Context/ErrorContext";
+import { Container, Typography, Paper, Button } from"@mui/material";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import { useError } from "../Context/ErrorContext";
 
 
 const ErrorPage = ( ) => {
@@ -24,7 +24,8 @@ const ErrorPage = ( ) => {
         </Paper>
         <Footer />
     </Container>
-)
+    )
 }
+
 
 export default ErrorPage;

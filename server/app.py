@@ -11,7 +11,7 @@ from logic import (
 )
 from exception import SecretServiceError
 from model import Secret
-from dicttoxml import dicttoxml
+from data_formatter import JsonFormatter, XmlFormatter, FORMATTING_OPTIONS
 
 
 app = Flask(__name__)
@@ -35,10 +35,9 @@ def get_secret_by_hash(hash: str):
         delete_secret(result.hash)
         raise SecretServiceError("Secret not available anymore", status_code=404)
     update_views(result)
-    if accept_header in formatting_options:
-        formatted_result = formatting_options[accept_header](result)
-    else:
+    if accept_header not in FORMATTING_OPTIONS:
         raise SecretServiceError("Unsupported content type", status_code=415)
+    formatted_result = FORMATTING_OPTIONS[accept_header].format_data(result)
     return formatted_result
 
 
@@ -49,10 +48,9 @@ def add_new_secret_to_database():
     validate_input_keys(json_request)
     validate_input_data(json_request)
     result = add_new_secret(json_request)
-    if accept_header in formatting_options:
-        formatted_result = formatting_options[accept_header](result)
-    else:
+    if accept_header not in FORMATTING_OPTIONS:
         raise SecretServiceError("Unsupported content type", status_code=415)
+    formatted_result = FORMATTING_OPTIONS[accept_header].format_data(result)
     return formatted_result
 
 
@@ -63,25 +61,9 @@ def handle_error(error: SecretServiceError):
     return response
 
 
-def format_to_json(data:Secret) ->dict:
-    return data.to_dict()
-
-
-def format_to_xml(data:Secret) ->str:
-    secret_dict = data.to_dict()
-    return dicttoxml(secret_dict)
-
-
-formatting_options = {
-    "application/json": format_to_json,
-    "application/xml": format_to_xml,
-    "*/*": format_to_json
-}
-
-
 create_table()
 app.run(
     host="localhost",
-    port=3000,
+    port=8000,
     debug=True,
 )
