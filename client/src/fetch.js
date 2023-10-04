@@ -1,6 +1,6 @@
 import { apiUrl } from "./config";
 
-const getSecret = (id) => {
+async function getSecret(id) {
     return fetch(apiUrl + `/v1/secret/${id}`, {
         method: "GET",
         headers: {
@@ -10,7 +10,7 @@ const getSecret = (id) => {
     });
 };
 
-const createSecret = (secret) => {
+async function createSecret(secret) {
     secret.expire_after = parseInt(secret.expire_after);
     secret.expire_after_views = parseInt(secret.expire_after_views);
   

@@ -22,25 +22,19 @@ const SecretForm = ({ onChange }) => {
     }));
   };
 
-  const handleSubmit = (secret) => {
-    createSecret(secret)
-      .then(async (res) => {
-        if (!res.ok) {
-          const error = await res.json();
-          throw new Error(error.message);
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        const id = data.hash;
-        onChange(id);
-      })
-      .catch((error) => {
-        catchError(error.message);
-        navigate("/error");
-      });
+  async function handleSubmit(secret) {
+    try {
+      const response = await createSecret(secret)
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+      onChange(data.hash);
+    } catch (error) {
+      catchError(error.message);
+      navigate("/error");
   };
+}
 
   return (
     <Paper sx={{ px: 4, py: 5, m: 2 }} elevation={4}>
