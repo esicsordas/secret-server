@@ -91,18 +91,24 @@ To run this project on your computer, you need to have the following:
    ```sh
    git clone https://github.com/esicsordas/secret-server.git
    ```
-:two: To run the server successfully, you need to install a few things: Flask, Psycopg2, Python-dotenv, flask-cors and dicttoxml.
+:two: To run the server successfully, you need to install a few things that are in the requirements file.
       You can install these with the following command:
   ```sh
     pip install -r requirements.txt
    ```
 
-:three: To start the frontend separately (optional), you have to go into the client folder and run the following command in the terminal:
+:three: For the client, the dependencies in the package.json file are needed.
+      You can install these with the following command:
+  ```sh
+    npm install
+   ```
+
+:four: To start the frontend separately (optional), you have to go into the client folder and run the following command in the terminal:
   ```sh
       npm start
    ```
 
-:four: To start the backend, go into the server folder and run the following command in the terminal:
+:five: To start the backend, go into the server folder and run the following command in the terminal:
 ```sh
       python app.py
    ```
@@ -114,13 +120,15 @@ To run this project on your computer, you need to have the following:
 <br>
 <p align="center"> <b>OR</b> </p>
 <br>
-Hosted option: !! TO DO !!<br>
+Reaching the hosted version: <br>
  <br>
-:one: 
+ 
+:one: Go to this webpage: 
 
-:two:  
-
-:three: 
+```sh
+      https://secret-service-client.onrender.com/
+  ```
+ 
   
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
