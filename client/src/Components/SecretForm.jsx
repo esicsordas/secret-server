@@ -93,7 +93,7 @@ const SecretForm = ({ onChange }) => {
             required={true}
             value={formData.expire_after || ""}
             onChange={handleInputChange}
-            placeholder="Write in a positive integer!"
+            placeholder="Write in an integer for minutes!"
             inputProps={{ min: 0, max: 9999999 }}
             sx={{my:6, mx:2 }}
           />
