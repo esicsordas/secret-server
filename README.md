@@ -128,7 +128,14 @@ Reaching the hosted version: <br>
 ```sh
       https://secret-service-client.onrender.com/
   ```
+ <p align="center"> <b>Tests</b> </p>
+<br>
+To run the tests,go into the server folder and run the following command in the terminal : <br>
+ <br>
  
+```sh
+      pytest
+  ```
   
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
