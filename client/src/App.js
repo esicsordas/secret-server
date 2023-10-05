@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Typography, Box } from '@mui/material';
 import Footer from './Components/Footer';
@@ -5,6 +6,10 @@ import Header from './Components/Header';
 
 const App = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.title = 'The Secret Server';
+      }, []);
 
     const goToNewSecret = () => {
         navigate("/add-new-secret")
