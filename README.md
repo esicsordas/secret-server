@@ -128,7 +128,12 @@ Reaching the hosted version: <br>
 ```sh
       https://secret-service-client.onrender.com/
   ```
+Please keep in mind that due to the properties of the hosting service, it takes some time for the server to start.
+<br>
+<br>
+
  <p align="center"> <b>Tests</b> </p>
+
 <br>
 To run the tests,go into the server folder and run the following command in the terminal : <br>
  <br>
